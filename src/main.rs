@@ -1,6 +1,5 @@
 use rust_simd_test::{mult_vectors_with_simd, mult_vectors_without_simd};
 
-pub mod alpha_blend_pixel_buffers;
 
 fn main() {
     println!("{}", "Hello world!");
