@@ -1,0 +1,30 @@
+use rust_simd_test::{mult_vectors_without_simd, mult_vectors_with_simd};
+
+fn simd_experiment() {
+    // generate a vector of size 100_000_000, with ints ascending 0, 1, 2, ...
+    const SIZE: usize = 100_000_000;
+    let v1: Vec<u64> = (0u64..SIZE as u64).collect();
+
+    // generate another vector of size 1_000_000, with ints descending
+    let v2: Vec<u64> = v1.iter().copied().rev().collect();
+
+    println!("{}", "start");
+
+    // run without simd
+    {
+        let v3 = mult_vectors_without_simd(&v1, &v2);
+        println!("{}", v3[500]);
+    }
+
+    // run with simd
+    {
+        let v4 = mult_vectors_with_simd(&v1, &v2);
+        println!("{}", v4[500]);
+    }
+
+    // TODO: benchmark
+}
+
+fn main() {
+    simd_experiment();
+}
