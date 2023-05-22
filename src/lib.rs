@@ -5,6 +5,9 @@ extern crate test;
 
 use std::simd::{f32x4, u64x4};
 
+pub mod alpha_blend_pixel_buffers;
+pub mod fibonacci;
+
 pub fn mult_vectors_without_simd(vec1: &Vec<u64>, vec2: &Vec<u64>) -> Vec<u64> {
     let mut vec3 = vec![];
     for (v1, v2) in vec1.iter().zip(vec2.iter()) {
@@ -50,15 +53,6 @@ pub fn div_vectors_without_simd(vec1: &Vec<f64>, vec2: &Vec<f64>) -> Vec<f64> {
 //     sum
 // }
 
-#[inline]
-pub fn fibonacci(n: u64) -> u64 {
-    match n {
-        0 => 1,
-        1 => 1,
-        n => fibonacci(n - 1) + fibonacci(n - 2),
-    }
-}
-
 pub fn add_two(a: i32) -> i32 {
     a + 2
 }
@@ -71,11 +65,6 @@ mod tests {
     #[test]
     fn it_works() {
         assert_eq!(4, add_two(2));
-    }
-
-    #[bench]
-    fn bench_add_two(b: &mut Bencher) {
-        b.iter(|| fibonacci(test::black_box(20)));
     }
 
     #[bench]
