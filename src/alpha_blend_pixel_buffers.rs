@@ -3,7 +3,7 @@ pub fn alpha_blend_pixel_buffers(buffers: &Vec<&Vec<f32>>) -> Vec<f32> {
     let mut output: Vec<f32> = buffers[0].clone();
     for buffer in buffers.iter().skip(1) {
         for (i, pixel) in buffer.chunks(4).enumerate() {
-            let bg: [f32; 4] = buffer[i..i+4].try_into().unwrap();
+            let bg: [f32; 4] = output[i..i+4].try_into().unwrap();
             let fg: [f32; 4] = pixel.try_into().unwrap();
             let new_pixel = blend_pixels(&bg, &fg);
 
